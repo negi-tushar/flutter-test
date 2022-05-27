@@ -86,8 +86,9 @@ class _AddUsersState extends State<AddUsers> {
     print(user);
     return Scaffold(
       appBar: AppBar(
-        title:
-            user == null ? const Text("Add User") : const Text("Update User"),
+        title: user.id.isEmpty
+            ? const Text("Add User")
+            : const Text("Update User"),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -243,7 +244,7 @@ class _AddUsersState extends State<AddUsers> {
                 },
                 style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 50)),
-                child: user == null
+                child: user.city.isEmpty
                     ? const Text("Add User")
                     : const Text("Update User"),
               )
