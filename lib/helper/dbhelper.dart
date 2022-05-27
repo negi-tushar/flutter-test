@@ -19,14 +19,14 @@ class DBhelper {
   }
 
   static Future<void> insert(String id, User data) async {
-    //print(data.city);
-    await boxdata.add(data);
-  }
-
-  static Future<void> update(String id, User data) async {
-    //print(data.city);
+    print('insert');
     await boxdata.put(id, data);
   }
+
+  // static Future<void> update(String id, User data) async {
+  //   print('update');
+  //   await boxdata.put(id, data);
+  // }
 
   static List<User> fetchdata() {
     List<User> data = boxdata.values.toList();
@@ -34,7 +34,8 @@ class DBhelper {
     return data;
   }
 
-  static Future<void> deleteData(int id) async {
-    await boxdata.deleteAt(id);
+  static Future<void> deleteData(String id) async {
+    await boxdata.delete(id);
+    // await boxdata.clear();
   }
 }

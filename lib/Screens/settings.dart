@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertest/Screens/login_screen.dart';
 import 'package:fluttertest/widgets/setting_options.dart';
 
 class MySetting extends StatefulWidget {
@@ -31,6 +32,18 @@ class _MySettingState extends State<MySetting> {
           value: darkTheme,
           onChanged: isdarktheme,
         ),
+        //Spacer(),
+        ListTile(
+          tileColor: Colors.black12,
+          leading: const Text(
+            'Logout',
+            style: TextStyle(fontSize: 18),
+          ),
+          trailing: const Icon(Icons.logout),
+          onTap: () {
+            Navigator.pushNamed(context, LoginPage.id);
+          },
+        )
       ]),
       // drawer: const CustomDrawer(),
     );

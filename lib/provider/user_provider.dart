@@ -10,36 +10,35 @@ class UserProvider extends ChangeNotifier {
   }
 
   void additem(User userdata) async {
-    await DBhelper.insert(DateTime.now.toString(), userdata);
+    await DBhelper.insert(userdata.id, userdata);
     // print('useradded');
 
     // notifyListeners();
   }
 
-  void deletedata(int index) {
-    DBhelper.deleteData(index);
+  void deletedata(String id) {
+    DBhelper.deleteData(id);
     notifyListeners();
   }
 
   void getMyData() {
-    print('hello get data');
     _myAllData.clear();
     // DBhelper.deleteData();
     final List<User> data = DBhelper.fetchdata();
-
+    print(data.length);
     for (var i in data) {
       _myAllData.add(i);
     }
   }
 
-  void updateUser(int key, User userdata) async {
-    print('key--->$key');
-    await DBhelper.update(key.toString(), userdata);
-    DBhelper.deleteData(key);
-    // print('useradded');
+  // void updateUser(int key, User userdata) async {
+  //   print('key--->$key');
+  //   await DBhelper.update(key.toString(), userdata);
+  //   DBhelper.deleteData(key);
+  //   // print('useradded');
 
-    // notifyListeners();
-  }
+  //   // notifyListeners();
+  // }
 
   User findbyID(int? index) {
     return myAllData[index!];

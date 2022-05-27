@@ -33,31 +33,32 @@ class _AddUsersState extends State<AddUsers> {
 
     formGlobalKey.currentState?.save();
     print(update);
-    if (update) {
-      Provider.of<UserProvider>(context, listen: false).updateUser(
-          index,
-          User(
-            city: user.city,
-            dob: user.dob,
-            email: user.email,
-            gender: gender.toString(),
-            mobile: user.mobile,
-            name: user.name,
-            id: DateTime.now().toIso8601String(),
-          ));
-    } else {
-      Provider.of<UserProvider>(context, listen: false).additem(
-        User(
-          city: user.city,
-          dob: user.dob,
-          email: user.email,
-          gender: gender.toString(),
-          mobile: user.mobile,
-          name: user.name,
-          id: DateTime.now().toIso8601String(),
-        ),
-      );
-    }
+    // if (update) {
+    //   Provider.of<UserProvider>(context, listen: false).updateUser(
+    //       index,
+    //       User(
+    //         city: user.city,
+    //         dob: user.dob,
+    //         email: user.email,
+    //         gender: gender.toString(),
+    //         mobile: user.mobile,
+    //         name: user.name,
+    //         id: DateTime.now().toIso8601String(),
+    //       ));
+    // } else {
+    print(user.id);
+    Provider.of<UserProvider>(context, listen: false).additem(
+      User(
+        city: user.city,
+        dob: user.dob,
+        email: user.email,
+        gender: gender.toString(),
+        mobile: user.mobile,
+        name: user.name,
+        id: user.id.isEmpty ? DateTime.now().toIso8601String() : user.id,
+      ),
+    );
+    // }
     Navigator.of(context).pushNamed(HomeScreen.id);
   }
 
@@ -73,6 +74,7 @@ class _AddUsersState extends State<AddUsers> {
       print(user);
       return;
     }
+    print('index->>$index');
     user = Provider.of<UserProvider>(context, listen: false).findbyID(index);
     setState(() {
       isUpdate = true;
@@ -85,7 +87,7 @@ class _AddUsersState extends State<AddUsers> {
     return Scaffold(
       appBar: AppBar(
         title:
-            user != null ? const Text("Add User") : const Text("Update User"),
+            user == null ? const Text("Add User") : const Text("Update User"),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -241,7 +243,7 @@ class _AddUsersState extends State<AddUsers> {
                 },
                 style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 50)),
-                child: user != null
+                child: user == null
                     ? const Text("Add User")
                     : const Text("Update User"),
               )

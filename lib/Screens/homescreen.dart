@@ -33,7 +33,7 @@ class _MyWidgetState extends State<HomeScreen> {
           isExtended: true,
           child: const Icon(Icons.add),
         ),
-        drawer: CustomDrawer(),
+        drawer: const CustomDrawer(),
         appBar: AppBar(
           title: const Text('Test App'),
         ),
@@ -47,9 +47,19 @@ class _MyWidgetState extends State<HomeScreen> {
               child: ListTile(
                   tileColor: Colors.blue.shade100,
                   isThreeLine: true,
-                  leading: Text(listdata.name),
-                  title: Text(listdata.city),
-                  subtitle: Text(listdata.email),
+                  leading: const Icon(
+                    Icons.person,
+                    color: Colors.green,
+                    size: 40,
+                  ),
+                  title: Text(listdata.name),
+                  subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(listdata.city),
+                        Text(listdata.mobile),
+                        Text(listdata.email),
+                      ]),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -63,7 +73,7 @@ class _MyWidgetState extends State<HomeScreen> {
                                 actions: [
                                   ElevatedButton(
                                     onPressed: () {
-                                      data.deletedata(index);
+                                      data.deletedata(listdata.id);
                                       Navigator.of(context).pop();
                                       showSnackBar('Item Deleted', context);
                                     },
